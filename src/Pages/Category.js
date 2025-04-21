@@ -1,10 +1,10 @@
-const Empresa = () => {
+const Category = () => {
     return (
         <div>
-            <h1>Empresa</h1>
+            <h1>Categoria</h1>
             <p>Conteudo aqui</p>
         </div>
     )
 }
 
-export default Empresa
+export default Category

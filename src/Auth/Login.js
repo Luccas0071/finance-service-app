@@ -2,17 +2,47 @@ import { Link } from "react-router-dom"
 import './Login.css'
 
 import { useState } from "react"
+import axios from "axios"
 
 const Login = () => {
 
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
+        if (!email || !password) {
+            return alert("Preencha email e senha.");
+        }
         event.preventDefault();
 
-        console.log('Teste', email, password);
-        console.log('Enviar');
+        try {
+            const response = await axios.post(
+                process.env.REACT_APP_FINANCE_SERVICE_API_HOST + '/v1/auth/login'
+                , 
+                {
+                    email,
+                    password
+                },
+                {
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                }
+            );
+
+            const result = response.data
+            localStorage.setItem('token', result.token);
+            window.location.href = "/home";
+        } catch (error) {
+            if (error.response) {
+                alert(error.response.data.message || "Erro ao fazer login.");
+            } else if (error.request) {
+                alert("Sem resposta do servidor.");
+            } else {
+                alert("Erro inesperado.");
+            }
+            console.error(error);
+        }
     }
 
 

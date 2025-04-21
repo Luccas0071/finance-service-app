@@ -1,10 +1,10 @@
-const Home = () => {
+const Planning = () => {
     return (
         <div>
-            <h1>Home</h1>
+            <h1>Planejamento</h1>
             <p>Conteudo aqui</p>
         </div>
     )
 }
 
-export default Home
+export default Planning
